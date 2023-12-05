@@ -180,12 +180,14 @@ def main():
                 time.sleep(1)
                 return
         
+        bombs_to_remove = []  # 削除する爆弾を格納するリスト
         for bomb in bombs:
             if beam is not None and beam.rct.colliderect(bomb.rct):
-                beam = None
-                bomb = None
+                bombs_to_remove.append(bomb)
                 bird.change_img(6, screen)
 
+        for bomb in bombs_to_remove:
+            bombs.remove(bomb)
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
